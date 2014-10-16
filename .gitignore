@@ -1,6 +1,6 @@
-UnityProject/Library/
-UnityProject/Temp/
+Topaz/Library/
+Topaz/Temp/
 *.sln
-UnityProject/obj/
+Topaz/obj/
 *.suo
 *.csproj
