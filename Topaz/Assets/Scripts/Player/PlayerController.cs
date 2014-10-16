@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Character
 {
-    public class CharacterController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         public float translationSpeed = 10.0f;
         public float rotationSpeed = 50.0f;
