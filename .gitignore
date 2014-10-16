@@ -1,6 +1,6 @@
-Topaz/Library/
-Topaz/Temp/
+Topaz/Library/*
+Topaz/Temp/*
 *.sln
-Topaz/obj/
+Topaz/obj/*
 *.suo
 *.csproj
