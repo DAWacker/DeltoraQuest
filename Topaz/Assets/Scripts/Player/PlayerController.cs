@@ -9,33 +9,55 @@ namespace Character
 {
     public class PlayerController : MonoBehaviour
     {
+        public GameObject followingCamera;
         public float translationSpeed = 10.0f;
-        public float rotationSpeed = 50.0f;
+        public float jumpSpeed = 10.0f;
 
-        float minRotation = -25f;
-        float maxRotation = 25f;
-
-        Camera characterCam;
-        float rotationY = 0f;
-        float rotationX = 0f;
+        CameraController cameraController;
+        Animator animator;
 
         void Start()
         {
-            characterCam = GetComponentInChildren<Camera>();
+            cameraController = followingCamera.GetComponent<CameraController>();
+            animator = GetComponent<Animator>();
         }
 
         void Update()
         {
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * translationSpeed * Time.deltaTime);
-            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * translationSpeed * Time.deltaTime);
+            var forwardMovement = Input.GetAxis("Vertical");
+            var sprintMovement = Input.GetAxis("Sprint");
+            animator.SetFloat("walk", forwardMovement);
 
-            rotationX += Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-            rotationY += Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            var run = 0.0f;
+            var moveSpeed = translationSpeed;
+            if (sprintMovement > 0.0f && forwardMovement != 0.0f)
+            {
+                run = 0.2f;
+                moveSpeed = (translationSpeed * 3) * sprintMovement;
+            }
+            animator.SetFloat("run", run);
 
-            rotationX = Mathf.Clamp(rotationX, minRotation, maxRotation);
-            rotationY = Mathf.Clamp(rotationY, minRotation, maxRotation);
+            if (forwardMovement != 0.0f)
+            {
+                transform.localEulerAngles = new Vector3(
+                    transform.localEulerAngles.x,
+                    cameraController.transform.localEulerAngles.y,
+                    transform.localEulerAngles.z);
+            }
+            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime);
+        }
 
-            characterCam.transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+        void OnCollisionEnter(Collision col)
+        { 
+            if (col.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+                Debug.Log("Hitting terrain");
+        }
+
+        void OnCollisionExit(Collision col)
+        {
+            if (col.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+                Debug.Log("Leaving terrain");
         }
     }
 }
