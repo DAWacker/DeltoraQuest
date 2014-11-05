@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using UnityEngine;
+using Assets.Items;
+using Assets.Scripts.Player;
 
-namespace Notifications
+namespace Assets.Scripts.Notifications
 {
     public class ObjectiveCenter : MonoBehaviour
     {
@@ -19,16 +21,19 @@ namespace Notifications
 
         List<Objective> objectives = new List<Objective>();
 
+        public GameObject player;
         public GameObject counterObjective;
+
+        PlayerInfo playerInfo;
 
         void Start()
         {
+            playerInfo = player.GetComponent<PlayerInfo>();
+            StartCoroutine(WaitThenGiveObjective());
         }
 
         IEnumerator WaitThenGiveObjective()
         {
-            yield return new WaitForSeconds(2.0f);
-
             var newCounterObjective = (GameObject)Instantiate(counterObjective);
             var objective = newCounterObjective.GetComponent<CounterObjective>();
             objective.transform.parent = transform.parent;
@@ -38,7 +43,7 @@ namespace Notifications
                 objectiveStartPosY, 
                 0.0f);
 
-            objective.Init(5, "Hit the 'N' key 5 times");
+            objective.Init(typeof(Apple), 5, "Collect 5 apples");
             objective.DisplayObjective();
 
             var objectiveDestoryed = Observable.FromEvent(
@@ -46,9 +51,7 @@ namespace Notifications
                 a => objective.OnObjectiveDestroyed -= a).Take(1);
             objectiveDestoryed.Subscribe(destoryed =>
             {
-                objectives.Remove(objective);
-                DestroyImmediate(newCounterObjective);
-                UpdateObjectives();
+                CleanUpObjective(newCounterObjective, objective);
             });
 
             yield return new WaitForSeconds(2f);
@@ -58,6 +61,7 @@ namespace Notifications
                 0.0f);
             objective.ScaleDown();
             objectives.Add(objective);
+            playerInfo.AddNewObjective(objective);
         }
 
         void UpdateObjectives()
@@ -72,12 +76,12 @@ namespace Notifications
             }
         }
 
-        void Update()
+        void CleanUpObjective(GameObject visual, Objective objective)
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                StartCoroutine(WaitThenGiveObjective());
-            }
+            objectives.Remove(objective);
+            playerInfo.RemoveObjective(objective);
+            DestroyImmediate(visual);
+            UpdateObjectives();
         }
     }
 }

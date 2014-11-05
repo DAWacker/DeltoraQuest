@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Assets.Items;
 
-namespace Notifications
+namespace Assets.Scripts.Notifications
 {
     public class CounterObjective : Objective
     {
+        Type targetItemType;
+
         int currentAmount;
         int targetAmount;
 
@@ -32,8 +35,11 @@ namespace Notifications
         public event Action OnObjectiveComplete;
         public event Action OnObjectiveDestroyed;
 
-        public void Init(int targetAmount, string displayText)
+        public void Init(Type targetItemType, int targetAmount, string displayText)
         {
+            // Set the collection item type
+            CollectionItemType = targetItemType;
+
             // Grab the labels
             var labels = GetComponentsInChildren<UILabel>();
             textLabel = labels.Single(l => l.name.Equals("textLabel"));
@@ -93,6 +99,11 @@ namespace Notifications
             positionTween.AddOnFinished(() => startPosition = new Vector3(x, y, z));
         }
 
+        public override void HandleProgression()
+        {
+            IncrementAmount();
+        }
+
         public void ScaleDown()
         {
             // Play the scale tween
@@ -122,14 +133,6 @@ namespace Notifications
                     tween.ResetToBeginning();
                     tween.PlayForward();
                 }
-            }
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                IncrementAmount();
             }
         }
     }
