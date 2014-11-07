@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using UnityEngine;
+using Assets.Items;
 
-namespace Character
+namespace Assets.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
@@ -46,18 +47,6 @@ namespace Character
             }
             transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
             transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime);
-        }
-
-        void OnCollisionEnter(Collision col)
-        { 
-            if (col.gameObject.layer == LayerMask.NameToLayer("Terrain"))
-                Debug.Log("Hitting terrain");
-        }
-
-        void OnCollisionExit(Collision col)
-        {
-            if (col.gameObject.layer == LayerMask.NameToLayer("Terrain"))
-                Debug.Log("Leaving terrain");
         }
     }
 }
