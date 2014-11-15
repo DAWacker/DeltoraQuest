@@ -9,7 +9,12 @@ namespace Assets.Items
 	public class Collectable : MonoBehaviour, ICollectable
 	{
         Type type;
-        public Type CollectableType { get { return type; } set { type = value; } }
+        int size = 1;
+        int stackAmount = 1;
+
+        public Type Type { get { return type; } set { type = value; } }
+        public int Size { get { return size; } set { size = value; } }
+        public int StackAmount { get { return stackAmount; } set { stackAmount = value; } }
 
         public virtual void Collect()
         {

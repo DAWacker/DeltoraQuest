@@ -10,7 +10,7 @@ namespace Assets.Items
 	{
         void Start()
         {
-            CollectableType = typeof(Apple);
+            Type = typeof(Apple);
         }
 
         public override void Collect()
