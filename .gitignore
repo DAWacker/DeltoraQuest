@@ -4,3 +4,4 @@ Topaz/Temp/*
 Topaz/obj/*
 *.suo
 *.csproj
+*.unityproj
