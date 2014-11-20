@@ -16,6 +16,7 @@ namespace Assets.Scripts.Player
         void Start()
         {
             objectives = new List<Objective>();
+            inventory = FindObjectOfType<Inventory>();
         }
 
         public void AddNewObjective(Objective objective)
@@ -40,6 +41,7 @@ namespace Assets.Scripts.Player
                     {
                         Destroy(collectable.gameObject);
                         objective.HandleProgression();
+                        inventory.AddItem(collectable);
                     }
                 }
             }

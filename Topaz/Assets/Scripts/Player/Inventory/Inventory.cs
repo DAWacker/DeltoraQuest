@@ -10,12 +10,7 @@ namespace Assets.Scripts.Player
     public class Inventory : MonoBehaviour
     {
         System.Random rand = new System.Random();
-        public GameObject window;
-
-        bool visible;
-
-        PlayerController playerController;
-        CameraController cameraController;
+        InventoryVisualization visuals;
 
         Collectable[,] items;
 
@@ -27,14 +22,15 @@ namespace Assets.Scripts.Player
         // Is the inventory full?
         bool full;
 
+        int rows = 5;
+        int columns = 3;
+
         void Start()
         {
-            playerController = FindObjectOfType<PlayerController>();
-            cameraController = FindObjectOfType<CameraController>();
+            visuals = FindObjectOfType<InventoryVisualization>();
 
-            items = new Collectable[4, 6];
+            items = new Collectable[columns, rows];
             full = false;
-            visible = false;
         }
 
         public void AddItem(Collectable item)
@@ -51,6 +47,7 @@ namespace Assets.Scripts.Player
             {
                 Debug.Log("Adding item at [" + freeColumn + ", " + freeRow + "]");
                 items[freeColumn, freeRow] = item;
+                visuals.AddItem(freeColumn, freeRow, item.ImageName);
 
                 // If the item is occupying the last row of this column,
                 // move to the next row
@@ -148,28 +145,11 @@ namespace Assets.Scripts.Player
             return false;
         }
 
-        void ToggleVisibility()
-        {
-            visible = !visible;
-            if (visible)
-            {
-                window.SetActive(true);
-                playerController.Disable();
-                cameraController.Disable();
-            }
-            else
-            {
-                window.SetActive(false);
-                playerController.Enable();
-                cameraController.Enable();
-            }
-        }
-
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                ToggleVisibility();
+                visuals.ToggleVisibility();
             }
 
             // Remove a random item

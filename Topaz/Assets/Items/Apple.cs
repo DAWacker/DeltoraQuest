@@ -11,6 +11,7 @@ namespace Assets.Items
         void Start()
         {
             Type = typeof(Apple);
+            ImageName = "apple";
         }
 
         public override void Collect()
