@@ -17,36 +17,52 @@ namespace Assets.Scripts.Player
         CameraController cameraController;
         Animator animator;
 
+        bool update;
+
         void Start()
         {
             cameraController = followingCamera.GetComponent<CameraController>();
             animator = GetComponent<Animator>();
+            update = true;
+        }
+
+        public void Disable()
+        {
+            update = false;
+        }
+
+        public void Enable()
+        {
+            update = true;
         }
 
         void Update()
         {
-            var forwardMovement = Input.GetAxis("Vertical");
-            var sprintMovement = Input.GetAxis("Sprint");
-            animator.SetFloat("walk", forwardMovement);
-
-            var run = 0.0f;
-            var moveSpeed = translationSpeed;
-            if (sprintMovement > 0.0f && forwardMovement != 0.0f)
+            if (update)
             {
-                run = 0.2f;
-                moveSpeed = (translationSpeed * 3) * sprintMovement;
-            }
-            animator.SetFloat("run", run);
+                var forwardMovement = Input.GetAxis("Vertical");
+                var sprintMovement = Input.GetAxis("Sprint");
+                animator.SetFloat("walk", forwardMovement);
 
-            if (forwardMovement != 0.0f)
-            {
-                transform.localEulerAngles = new Vector3(
-                    transform.localEulerAngles.x,
-                    cameraController.transform.localEulerAngles.y,
-                    transform.localEulerAngles.z);
+                var run = 0.0f;
+                var moveSpeed = translationSpeed;
+                if (sprintMovement > 0.0f && forwardMovement != 0.0f)
+                {
+                    run = 0.2f;
+                    moveSpeed = (translationSpeed * 3) * sprintMovement;
+                }
+                animator.SetFloat("run", run);
+
+                if (forwardMovement != 0.0f)
+                {
+                    transform.localEulerAngles = new Vector3(
+                        transform.localEulerAngles.x,
+                        cameraController.transform.localEulerAngles.y,
+                        transform.localEulerAngles.z);
+                }
+                transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+                transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime);
             }
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
-            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime);
         }
     }
 }

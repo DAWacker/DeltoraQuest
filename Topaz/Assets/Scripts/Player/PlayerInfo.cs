@@ -10,23 +10,18 @@ namespace Assets.Scripts.Player
 {
     public class PlayerInfo : MonoBehaviour
     {
-        List<Collectable> collectables;
         List<Objective> objectives;
+        Inventory inventory;
 
         void Start()
         {
-            collectables = new List<Collectable>();
             objectives = new List<Objective>();
+            inventory = FindObjectOfType<Inventory>();
         }
 
         public void AddNewObjective(Objective objective)
         {
             objectives.Add(objective);
-        }
-
-        public void AddNewCollectable(Collectable collectable)
-        {
-            collectables.Add(collectable);
         }
 
         public void RemoveObjective(Objective objective)
@@ -42,11 +37,11 @@ namespace Assets.Scripts.Player
                 var collectable = col.gameObject.GetComponent<Collectable>();
                 foreach (var objective in objectives)
                 {
-                    if (objective.CollectionItemType == collectable.CollectableType)
+                    if (objective.CollectionItemType == collectable.Type)
                     {
-                        collectables.Add(collectable);
                         Destroy(collectable.gameObject);
                         objective.HandleProgression();
+                        inventory.AddItem(collectable);
                     }
                 }
             }

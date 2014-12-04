@@ -10,7 +10,8 @@ namespace Assets.Items
 	{
         void Start()
         {
-            CollectableType = typeof(Apple);
+            Type = typeof(Apple);
+            ImageName = "apple";
         }
 
         public override void Collect()
