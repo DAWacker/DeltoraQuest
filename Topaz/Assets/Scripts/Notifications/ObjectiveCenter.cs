@@ -15,7 +15,7 @@ namespace Assets.Scripts.Notifications
         float objectiveStartPosX = 0.0f;
 
         float objectivePlacementY = 250.0f;
-        float objectivePlacementX = -500.0f;
+        float objectivePlacementX = -426.0f;
 
         float objectiveHeight = 40.0f;
 

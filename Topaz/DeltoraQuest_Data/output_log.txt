@@ -1,0 +1,45 @@
+Initialize engine version: 4.5.1f3 (73cd57f80e3e)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 480 (ID=0x6c0)
+    Vendor:   NVIDIA
+    VRAM:     1482 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\System.Reactive.dll (this message is harmless)
+Loading D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\System.Reactive.dll into Unity Child Domain
+- Completed reload, in  0.127 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\System.Core.dll (this message is harmless)
+WARNING: Shader Unsupported: 'Reflective/VertexLit' - Pass '' shader state not supported
+WARNING: Shader Unsupported: 'Hidden/Nature/Tree Creator Leaves Optimized' - Pass '' shader state not supported
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+The tree Bush3 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+The tree RockMesh must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+The tree ThinTree must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+The tree ThinTree must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+Platform assembly: D:\Users\daw4475\DeltoraQuest\Topaz\DeltoraQuest_Data\Managed\System.dll (this message is harmless)
